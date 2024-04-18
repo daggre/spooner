@@ -2772,10 +2772,7 @@ function MainSpoonerUpdates()
 
 		if MessageInterval then
 			MessageInterval = false
-			CreateThread(function()
-				Wait(MessageRate)
-				MessageInterval = true
-			end)
+			SetTimeout(MessageRate, function() MessageInterval = true; end)
 			SendNUIMessage({
 				type = 'updateSpoonerHud',
 				entity = entity,
