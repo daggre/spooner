@@ -327,20 +327,20 @@ end
 
 function GetModelName(model)
 	if PedsHashLookup[model] then
-        return PedsHashLookup[model]
-    end
+		return PedsHashLookup[model]
+	end
 
-    if VehiclesHashLookup[model] then
-        return VehiclesHashLookup[model]
-    end
+	if VehiclesHashLookup[model] then
+		return VehiclesHashLookup[model]
+	end
 
-    if ObjectsHashLookup[model] then
-        return ObjectsHashLookup[model]
-    end
+	if ObjectsHashLookup[model] then
+		return ObjectsHashLookup[model]
+	end
 
-    if PickupsHashLookup[model] then
-        return PickupsHashLookup[model]
-    end
+	if PickupsHashLookup[model] then
+		return PickupsHashLookup[model]
+	end
 
 	return tostring(model)
 end
@@ -2769,16 +2769,18 @@ function MainSpoonerUpdates()
 		elseif FocusTarget and not FreeFocus then
 			entity = FocusTarget
 		end
-        if MessageInterval then
-            MessageInterval = false
-            CreateThread(function()
-                Wait(MessageRate)
-                MessageInterval = true
-            end)
+
+		if MessageInterval then
+			MessageInterval = false
+			CreateThread(function()
+				Wait(MessageRate)
+				MessageInterval = true
+			end)
 			SendNUIMessage({
 				type = 'updateSpoonerHud',
 				entity = entity,
 				netId = NetworkGetEntityIsNetworked(entity) and ObjToNet(entity),
+				netOwner = NetworkGetEntityIsNetworked(entity) and NetworkGetEntityOwner(entity),
 				entityType = GetSpoonerEntityType(entity),
 				modelName = GetModelName(GetSpoonerEntityModel(entity)),
 				attachedEntity = AttachedEntity,
